@@ -863,6 +863,19 @@ button:focus-visible {
         bottom: 10%;
     }
 
+    /* Main 3D composition responsiveness.
+       The Cat model is absolutely positioned at top:35% of the wrapper and
+       (on desktop) uses height:100%, which makes its container bottom reach
+       135% of the wrapper and protrude into the FAB zone on short portrait
+       screens. Here we keep the Cat visually anchored at the Mother's feet
+       (top stays 35%) but limit its height to 65% so the container bottoms
+       out at the wrapper edge (35% + 65% = 100%) instead of 135%. The Mother
+       wrapper is left untouched on this breakpoint so the desktop composition
+       (which lives outside this media query) is not affected. */
+    #cat-model {
+        height: 65%;
+    }
+
     .fab-btn {
         width: 58px;
         height: 58px;
