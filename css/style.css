@@ -884,9 +884,6 @@ button:focus-visible {
        out at the wrapper edge (35% + 65% = 100%) instead of 135%. The Mother
        wrapper is left untouched on this breakpoint so the desktop composition
        (which lives outside this media query) is not affected. */
-    #cat-model {
-        height: 65%;
-    }
 
     .fab-btn {
         width: 58px;
