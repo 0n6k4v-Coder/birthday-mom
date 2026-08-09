@@ -63,6 +63,7 @@ birthday-mom/
 ├── index.html
 │
 ├── css/
+│   ├── splash.css
 │   └── style.css
 │
 ├── js/
@@ -89,7 +90,7 @@ birthday-mom/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/birthday-mom.git
+git clone https://github.com/0n6k4v-Coder/birthday-mom.git
 ```
 
 ### 2. Open the Project
