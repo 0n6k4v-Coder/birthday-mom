@@ -27,6 +27,12 @@ const birthdaySplash = document.getElementById("birthdaySplash");
 let momLoaded = false;
 let catLoaded = false;
 
+// Lightweight instrumentation (kept in production — negligible cost).
+function mark(name) {
+    try { performance.mark(name); } catch (_) {}
+}
+mark("splash-visible");
+
 /*
  * Hide splash after the 3D models
  * have finished loading.
@@ -36,6 +42,7 @@ function hideBirthdaySplash() {
         return;
     }
 
+    mark("splash-hidden");
     birthdaySplash.classList.add("is-hidden");
 
     setTimeout(() => {
@@ -43,39 +50,62 @@ function hideBirthdaySplash() {
     }, 800);
 }
 
+function onModelLoaded(modelName) {
+    mark(`${modelName}-model-loaded`);
+    switch (modelName) {
+        case "mom":
+            momLoaded = true;
+            break;
+        case "cat":
+            catLoaded = true;
+            break;
+    }
+    hideBirthdaySplash();
+}
+
+function onModelError(modelName, event) {
+    // A failed model must not trap the user on the Splash forever.
+    // Log so failures are visible during development, then treat the
+    // model as "settled" so the Splash can proceed once the other
+    // resources are ready (or the timeout fallback fires).
+    mark(`${modelName}-model-error`);
+    // eslint-disable-next-line no-console
+    console.error(`${modelName} model failed to load:`, event && event.detail ? event.detail : event);
+    switch (modelName) {
+        case "mom":
+            momLoaded = true;
+            break;
+        case "cat":
+            catLoaded = true;
+            break;
+    }
+    hideBirthdaySplash();
+}
+
 /*
  * Mom model
  */
-momModel?.addEventListener(
-    "load",
-    () => {
-        momLoaded = true;
-        hideBirthdaySplash();
-    },
-    { once: true }
-);
+momModel?.addEventListener("load", () => onModelLoaded("mom"), { once: true });
+momModel?.addEventListener("error", (event) => onModelError("mom", event), { once: true });
 
 /*
  * Cat model
  */
-catModel?.addEventListener(
-    "load",
-    () => {
-        catLoaded = true;
-        hideBirthdaySplash();
-    },
-    { once: true }
-);
+catModel?.addEventListener("load", () => onModelLoaded("cat"), { once: true });
+catModel?.addEventListener("error", (event) => onModelError("cat", event), { once: true });
 
 /*
  * Safety fallback.
  *
- * If a model never fires "load"
- * (e.g. an error or slow network),
+ * If a model never fires "load" or "error"
+ * (e.g. a network failure or a device issue),
  * don't leave the user stuck forever.
  */
 setTimeout(() => {
     if (!birthdaySplash.classList.contains("is-hidden")) {
+        // Force-unblock readiness so the Splash never traps the user.
+        momLoaded = true;
+        catLoaded = true;
         birthdaySplash.classList.add("is-hidden");
     }
 }, 10000);
