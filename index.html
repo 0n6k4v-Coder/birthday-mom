@@ -19,8 +19,53 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="./css/style.css">
+
+    <!-- Splash CSS -->
+    <link rel="stylesheet" href="./css/splash.css">
 </head>
 <body>
+
+    <!-- SPLASH SCREEN -->
+    <div id="birthdaySplash" class="birthday-splash">
+
+        <div class="splash-paper">
+
+            <div class="splash-tape"></div>
+
+            <div class="splash-small-text">
+                a little something for you
+            </div>
+
+            <div class="splash-cake">
+                🎂
+            </div>
+
+            <h2>
+                Happy Birthday,
+                <span>Mom</span>
+            </h2>
+
+            <div class="splash-line"></div>
+
+            <p>
+                I'm getting everything ready...
+            </p>
+
+            <div class="splash-loading">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+            <div class="splash-handwriting">
+                made with love ♡
+            </div>
+
+        </div>
+
+    </div>
 
     <!-- HEADER -->
     <header class="site-header">
@@ -32,7 +77,7 @@
     <main class="stage">
         <div class="model-wrapper">
             <!-- MOM -->
-            <model-viewer 
+            <model-viewer
                 id="model"
                 src="./assets/models/asian-woman-3d-model.glb"
                 alt="A cute 3D mother character"
@@ -42,15 +87,17 @@
                 max-camera-orbit="auto auto auto"
                 disable-pan
                 disable-zoom
++                preload="auto"
                 autoplay
                 interaction-prompt="none">
             </model-viewer>
 
             <!-- CAT -->
-            <model-viewer 
+            <model-viewer
                 id="cat-model"
                 src="./assets/models/stylized-white-cat-3d-model.glb"
                 alt="A cute 3D cat"
+                preload="auto"
                 shadow-intensity="1"
                 camera-orbit="-5deg 84deg auto"
                 min-camera-orbit="auto auto auto"

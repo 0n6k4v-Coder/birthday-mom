@@ -16,6 +16,69 @@ const timeTotal = document.getElementById("timeTotal");
 const restartButton = document.getElementById("restartButton");
 const muteButton = document.getElementById("muteButton");
 const volumeIcon = document.getElementById("volumeIcon");
+const momModel = document.getElementById("model");
+const catModel = document.getElementById("cat-model");
+
+/* =========================================================
+   SPLASH SCREEN
+   ========================================================= */
+const birthdaySplash = document.getElementById("birthdaySplash");
+
+let momLoaded = false;
+let catLoaded = false;
+
+/*
+ * Hide splash after the 3D models
+ * have finished loading.
+ */
+function hideBirthdaySplash() {
+    if (!momLoaded || !catLoaded) {
+        return;
+    }
+
+    birthdaySplash.classList.add("is-hidden");
+
+    setTimeout(() => {
+        birthdaySplash.remove();
+    }, 800);
+}
+
+/*
+ * Mom model
+ */
+momModel?.addEventListener(
+    "load",
+    () => {
+        momLoaded = true;
+        hideBirthdaySplash();
+    },
+    { once: true }
+);
+
+/*
+ * Cat model
+ */
+catModel?.addEventListener(
+    "load",
+    () => {
+        catLoaded = true;
+        hideBirthdaySplash();
+    },
+    { once: true }
+);
+
+/*
+ * Safety fallback.
+ *
+ * If a model never fires "load"
+ * (e.g. an error or slow network),
+ * don't leave the user stuck forever.
+ */
+setTimeout(() => {
+    if (!birthdaySplash.classList.contains("is-hidden")) {
+        birthdaySplash.classList.add("is-hidden");
+    }
+}, 10000);
 
 /* =========================================================
    CONFIGURATION
