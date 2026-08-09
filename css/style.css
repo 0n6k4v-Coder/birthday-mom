@@ -848,7 +848,16 @@ button:focus-visible {
    ========================================================= */
 @media (max-width: 768px) {
     body {
-        padding: 1.5rem;
+        padding: 1.5rem 0;
+        overflow-x: hidden;
+    }
+
+    /* The stage's radial glow pseudo-element is 500px wide and overflows
+       the viewport on narrow screens. Constrain it to the stage width so
+       no horizontal scroll appears now that body horizontal padding is 0. */
+    .stage::before {
+        width: 300px;
+        height: 300px;
     }
 
     .site-header h1 {
