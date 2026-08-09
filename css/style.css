@@ -19,6 +19,19 @@
     --music-text: #5c5268;
     --music-muted: #9b91a3;
     --music-line: rgba(169, 152, 210, 0.14);
+
+    /*
+       RESPONSIVE SIZING SYSTEM
+       Fluid tokens so every visual object scales with viewport width AND height.
+       --space-unit  : base spacing unit (gutters, gaps)
+       --ui-scale    : overall composition scale factor
+       --control-size: min touch target + proportional control sizing
+       --font-scale  : typography scale factor
+    */
+    --space-unit: clamp(12px, 2vw + 1.5dvh, 22px);
+    --ui-scale: clamp(0.85, 1.05vw + 1.8dvh - 0.5px, 1.0);
+    --control-size: clamp(44px, 10vw + 2dvh, 64px);
+    --font-scale: clamp(0.85, 0.5vw + 1.3dvh, 1);
 }
 
 /* =========================================================
@@ -45,7 +58,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem;
+    padding: clamp(1rem, 3vw, 2rem) clamp(1.5rem, 4vw, 4rem);
 }
 
 button {
@@ -61,17 +74,17 @@ button {
 }
 
 .site-header h1 {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 4.2vw + 1.1dvh, 2.5rem);
     font-weight: 700;
-    letter-spacing: -0.5px;
+    letter-spacing: clamp(-0.3px, -0.05vw, -0.5px);
     text-shadow: 0 2px 4px rgba(255, 255, 255, 0.5);
 }
 
 .site-header p {
-    font-size: 1.1rem;
+    font-size: clamp(0.85rem, 1.6vw + 0.5dvh, 1.1rem);
     font-weight: 500;
     opacity: 0.8;
-    margin-top: 0.5rem;
+    margin-top: clamp(0.3rem, 0.8vw + 0.3dvh, 0.5rem);
 }
 
 /* =========================================================
@@ -89,8 +102,10 @@ button {
 .stage::before {
     content: "";
     position: absolute;
-    width: 500px;
-    height: 500px;
+    width: min(420px, 90vw, 85vh);
+    height: min(420px, 90vw, 85vh);
+    max-width: 100%;
+    max-height: 100%;
     background: radial-gradient(circle, rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0) 70%);
     border-radius: 50%;
     z-index: 0;
@@ -132,15 +147,15 @@ model-viewer {
    ========================================================= */
 .fake-shadow {
     position: absolute;
-    bottom: 12%;
+    bottom: clamp(8%, 2.5vw + 4dvh, 12%);
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
-    max-width: 400px;
-    height: 30px;
+    width: min(100%, 75vw, 80vh, 400px);
+    max-width: 100%;
+    height: clamp(22px, 5vw + 1dvh, 30px);
     background: rgba(0, 0, 0, 0.15);
     border-radius: 50%;
-    filter: blur(12px);
+    filter: blur(clamp(8px, 2vw + 0.5dvh, 12px));
     z-index: 0;
     animation: shadowPulse 4s ease-in-out infinite;
     pointer-events: none;
@@ -150,8 +165,8 @@ model-viewer {
    FLOATING MAIL BUTTON
    ========================================================= */
 .fab-btn {
-    width: 68px;
-    height: 68px;
+    width: clamp(58px, 12vw + 2dvh, 68px);
+    height: clamp(58px, 12vw + 2dvh, 68px);
     border-radius: 50%;
     background: linear-gradient(145deg, #ffffff 0%, #ffe9ef 100%);
     border: none;
@@ -160,15 +175,17 @@ model-viewer {
     justify-content: center;
     align-items: center;
     color: var(--accent-deep);
-    box-shadow: 0 10px 24px rgba(224, 85, 122, 0.35), 0 2px 4px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+    box-shadow: 0 clamp(8px, 2vw + 0.6dvh, 10px) clamp(18px, 4.5vw + 1dvh, 24px) rgba(224, 85, 122, 0.35), 0 2px 4px rgba(0, 0, 0, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9);
     transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
     z-index: 10;
-    position: relative;
+    position: fixed;
+    bottom: clamp(16px, 4vw + 2dvh, 24px);
+    right: clamp(16px, 4vw + 2dvh, 24px);
     animation: fabFloat 3.4s ease-in-out infinite;
 }
 
 .fab-btn .material-symbols-outlined {
-    font-size: 30px;
+    font-size: clamp(24px, 4vw + 1dvh, 30px);
     transition: transform 0.3s ease;
 }
 
@@ -230,11 +247,11 @@ model-viewer {
    3D CARD
    ========================================================= */
 .postcard-3d-container {
-    width: 90%;
-    max-width: 390px;
-    height: 560px;
-    perspective: 1500px;
-    transform: scale(0.8) translateY(50px);
+    width: min(90vw, 95dvh, 390px);
+    height: min(90dvh, 82vh, 560px);
+    max-width: 95vw;
+    perspective: clamp(1200px, 18vw + 8dvh, 1500px);
+    transform: scale(0.82) translateY(clamp(30px, 6vw + 1.2dvh, 50px));
     opacity: 0;
     transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
 }
@@ -264,13 +281,13 @@ model-viewer {
     inset: 0;
     backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
-    border-radius: 24px;
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.22);
+    border-radius: clamp(18px, 3vw + 0.8dvh, 24px);
+    box-shadow: 0 clamp(18px, 4vw + 1dvh, 25px) clamp(40px, 8vw + 2dvh, 60px) rgba(0, 0, 0, 0.22);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 32px;
+    padding: clamp(20px, 4.5vw + 1.2dvh, 32px);
     overflow: hidden;
 }
 
@@ -280,30 +297,30 @@ model-viewer {
 .postcard-front {
     background: repeating-linear-gradient(0deg, rgba(74, 74, 106, 0.018) 0px, rgba(74, 74, 106, 0.018) 1px, transparent 1px, transparent 26px), #ffffff;
     text-align: center;
-    border: 2px dashed rgba(255, 107, 149, 0.30);
+    border: clamp(1px, 0.3vw, 2px) dashed rgba(255, 107, 149, 0.30);
     outline: 1px solid rgba(255, 255, 255, 0.8);
-    outline-offset: -10px;
+    outline-offset: clamp(-12px, -2vw, -10px);
 }
 
 .postcard-front::before,
 .postcard-front::after {
     content: "";
     position: absolute;
-    width: 180px;
-    height: 180px;
+    width: clamp(120px, 28vw + 3dvh, 180px);
+    height: clamp(120px, 28vw + 3dvh, 180px);
     background: var(--bg-gradient);
     border-radius: 50%;
     opacity: 0.18;
 }
 
 .postcard-front::before {
-    top: -70px;
-    right: -70px;
+    top: clamp(-60px, -10vw, -70px);
+    right: clamp(-60px, -10vw, -70px);
 }
 
 .postcard-front::after {
-    bottom: -70px;
-    left: -70px;
+    bottom: clamp(-60px, -10vw, -70px);
+    left: clamp(-60px, -10vw, -70px);
 }
 
 /* =========================================================
@@ -311,23 +328,23 @@ model-viewer {
    ========================================================= */
 .postcard-stamp {
     position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 54px;
-    height: 64px;
+    top: clamp(12px, 2.5vw + 0.5dvh, 16px);
+    right: clamp(12px, 2.5vw + 0.5dvh, 16px);
+    width: clamp(40px, 8vw + 1dvh, 54px);
+    height: clamp(46px, 10vw + 1.5dvh, 64px);
     background: linear-gradient(160deg, #ffe3ec 0%, #ffd1e0 100%);
-    border: 2px dotted rgba(224, 85, 122, 0.5);
+    border: clamp(1px, 0.25vw, 2px) dotted rgba(224, 85, 122, 0.5);
     border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
     transform: rotate(6deg);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 clamp(2px, 0.5vw + 0.2dvh, 3px) clamp(6px, 1.5vw + 0.4dvh, 8px) rgba(0, 0, 0, 0.1);
     z-index: 3;
 }
 
 .postcard-stamp .material-symbols-outlined {
-    font-size: 24px;
+    font-size: clamp(16px, 3.5vw + 0.6dvh, 24px);
     color: var(--accent-deep);
 }
 
@@ -336,12 +353,12 @@ model-viewer {
    ========================================================= */
 .postcard-postmark {
     position: absolute;
-    top: 28px;
-    left: 28px;
-    width: 70px;
-    height: 70px;
+    top: clamp(22px, 4.5vw + 0.8dvh, 28px);
+    left: clamp(22px, 4.5vw + 0.8dvh, 28px);
+    width: clamp(55px, 12vw + 1.2dvh, 70px);
+    height: clamp(55px, 12vw + 1.2dvh, 70px);
     border-radius: 50%;
-    border: 2px solid rgba(74, 74, 106, 0.20);
+    border: clamp(1px, 0.2vw, 2px) solid rgba(74, 74, 106, 0.20);
     transform: rotate(-14deg);
     z-index: 3;
     opacity: 0.55;
@@ -351,8 +368,8 @@ model-viewer {
     content: "";
     position: absolute;
     top: 50%;
-    left: -14px;
-    width: calc(100% + 28px);
+    left: clamp(-16px, -3vw, -14px);
+    width: calc(100% + clamp(24px, 5vw, 28px));
     height: 1px;
     background: rgba(74, 74, 106, 0.22);
     transform: translateY(-50%);
@@ -362,18 +379,18 @@ model-viewer {
    FRONT CONTENT
    ========================================================= */
 .postcard-icon {
-    font-size: 48px;
+    font-size: clamp(36px, 8vw + 1.5dvh, 48px);
     color: var(--accent);
-    margin-bottom: 15px;
+    margin-bottom: clamp(10px, 2vw + 0.5dvh, 15px);
     animation: bounce 2s infinite;
     position: relative;
     z-index: 2;
 }
 
 .postcard-front h2 {
-    font-size: 2.1rem;
+    font-size: clamp(1.5rem, 3.4vw + 0.9dvh, 2.1rem);
     color: var(--accent-deep);
-    margin-bottom: 12px;
+    margin-bottom: clamp(8px, 1.8vw + 0.4dvh, 12px);
     font-weight: 700;
     position: relative;
     z-index: 2;
@@ -381,9 +398,9 @@ model-viewer {
 
 .postcard-divider {
     display: block;
-    width: 70px;
+    width: clamp(55px, 12vw, 70px);
     height: 2px;
-    margin-bottom: 16px;
+    margin-bottom: clamp(12px, 2.5vw + 0.7dvh, 16px);
     background-image: linear-gradient(to right, var(--gold) 60%, transparent 0%);
     background-size: 10px 2px;
     background-repeat: repeat-x;
@@ -394,32 +411,32 @@ model-viewer {
 .postcard-note {
     font-family: "Caveat", "Quicksand", sans-serif;
     font-weight: 700;
-    font-size: 1.5rem;
+    font-size: clamp(1.15rem, 2.6vw + 0.8dvh, 1.5rem);
     color: var(--text-color);
     line-height: 1.5;
-    margin-bottom: 28px;
+    margin-bottom: clamp(20px, 4.5vw + 1dvh, 28px);
     position: relative;
     z-index: 2;
-    max-width: 26ch;
+    max-width: min(26ch, 90vw);
 }
 
 /* =========================================================
    FLIP BUTTON
    ========================================================= */
 .flip-btn {
-    padding: 12px 30px;
+    padding: clamp(9px, 2.2vw + 0.5dvh, 12px) clamp(20px, 4.5vw + 1.5dvh, 30px);
     background: var(--accent);
     color: white;
     border: none;
-    border-radius: 50px;
+    border-radius: clamp(22px, 5vw, 50px);
     font-weight: 600;
-    font-size: 1rem;
+    font-size: clamp(0.8rem, 1.6vw + 0.4dvh, 1rem);
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(255, 107, 149, 0.3);
+    box-shadow: 0 clamp(3px, 0.8vw + 0.2dvh, 4px) clamp(8px, 2vw + 0.5dvh, 10px) rgba(255, 107, 149, 0.3);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: clamp(6px, 1.4vw, 8px);
     position: relative;
     z-index: 20;
 }
@@ -466,30 +483,30 @@ model-viewer {
 }
 
 .note-one {
-    top: 42px;
-    right: 70px;
-    font-size: 25px;
+    top: clamp(30px, 7vw + 1dvh, 42px);
+    right: clamp(50px, 12vw + 2dvh, 70px);
+    font-size: clamp(18px, 4.5vw + 0.8dvh, 25px);
     transform: rotate(10deg);
 }
 
 .note-two {
-    top: 100px;
-    left: 28px;
-    font-size: 18px;
+    top: clamp(70px, 14vw + 2dvh, 100px);
+    left: clamp(20px, 5vw + 1dvh, 28px);
+    font-size: clamp(14px, 3vw + 0.6dvh, 18px);
     transform: rotate(-12deg);
 }
 
 .note-three {
-    bottom: 85px;
-    right: 26px;
-    font-size: 20px;
+    bottom: clamp(60px, 12vw + 2dvh, 85px);
+    right: clamp(20px, 5vw + 1dvh, 26px);
+    font-size: clamp(16px, 3.5vw + 0.7dvh, 20px);
     transform: rotate(8deg);
 }
 
 .note-four {
-    bottom: 155px;
-    left: 25px;
-    font-size: 16px;
+    bottom: clamp(120px, 22vw + 4dvh, 155px);
+    left: clamp(20px, 5vw + 1dvh, 25px);
+    font-size: clamp(13px, 2.8vw + 0.5dvh, 16px);
     color: var(--music-pink);
 }
 
@@ -501,7 +518,7 @@ model-viewer {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    margin-bottom: 14px;
+    margin-bottom: clamp(10px, 2vw + 0.5dvh, 14px);
     position: relative;
     z-index: 5;
 }
@@ -509,24 +526,24 @@ model-viewer {
 .music-heading-copy {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    gap: clamp(1px, 0.2vw, 1px);
 }
 
 .music-heading-label {
-    font-size: 0.78rem;
+    font-size: clamp(0.62rem, 1.3vw + 0.3dvh, 0.78rem);
     color: var(--music-muted);
     letter-spacing: 0.4px;
 }
 
 .music-heading-script {
     font-family: "Caveat", cursive;
-    font-size: 1.25rem;
+    font-size: clamp(0.9rem, 1.8vw + 0.5dvh, 1.25rem);
     color: var(--music-pink);
 }
 
 .music-heart {
-    width: 32px;
-    height: 32px;
+    width: clamp(24px, 5vw + 1dvh, 32px);
+    height: clamp(24px, 5vw + 1dvh, 32px);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -536,7 +553,7 @@ model-viewer {
 }
 
 .music-heart .material-symbols-outlined {
-    font-size: 17px;
+    font-size: clamp(13px, 2.4vw + 0.5dvh, 17px);
     font-variation-settings: "FILL" 1;
 }
 
@@ -557,13 +574,13 @@ model-viewer {
    ========================================================= */
 .player-art {
     position: relative;
-    width: 220px;
-    height: 220px;
-    border-radius: 20px;
+    width: min(50vw, 58vw, 220px);
+    height: min(50vw, 58vw, 220px);
+    border-radius: clamp(14px, 3vw + 0.5dvh, 20px);
     overflow: hidden;
     background: linear-gradient(145deg, #f9dce5, #ded5ef);
-    box-shadow: 0 16px 35px rgba(112, 91, 125, 0.18), 0 3px 8px rgba(112, 91, 125, 0.08);
-    margin-bottom: 18px;
+    box-shadow: 0 clamp(10px, 2.5vw + 0.8dvh, 16px) clamp(22px, 5vw + 1.5dvh, 35px) rgba(112, 91, 125, 0.18), 0 clamp(2px, 0.5vw, 3px) clamp(5px, 1.2vw, 8px) rgba(112, 91, 125, 0.08);
+    margin-bottom: clamp(12px, 2.5vw + 0.8dvh, 18px);
     flex-shrink: 0;
 }
 
@@ -585,14 +602,14 @@ model-viewer {
 
 .player-art-label {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
-    padding: 4px 9px;
+    right: clamp(7px, 1.5vw, 10px);
+    bottom: clamp(7px, 1.5vw, 10px);
+    padding: clamp(3px, 0.7vw, 4px) clamp(7px, 1.6vw, 9px);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.78);
     color: var(--music-text);
     font-family: "Caveat", cursive;
-    font-size: 0.9rem;
+    font-size: clamp(0.72rem, 1.4vw + 0.3dvh, 0.9rem);
     z-index: 3;
     backdrop-filter: blur(5px);
 }
@@ -603,19 +620,19 @@ model-viewer {
 .player-meta {
     width: 100%;
     text-align: center;
-    margin-bottom: 9px;
+    margin-bottom: clamp(6px, 1.3vw + 0.3dvh, 9px);
 }
 
 .player-title {
     color: var(--music-text);
-    font-size: 1.22rem;
+    font-size: clamp(1rem, 2.2vw + 0.6dvh, 1.22rem);
     font-weight: 700;
     line-height: 1.25;
 }
 
 .player-artist {
     color: var(--music-muted);
-    font-size: 0.82rem;
+    font-size: clamp(0.68rem, 1.3vw + 0.35dvh, 0.82rem);
     font-weight: 500;
     margin-top: 4px;
 }
@@ -652,11 +669,11 @@ model-viewer {
 .player-progress {
     position: relative;
     width: 100%;
-    height: 4px;
+    height: clamp(3px, 0.8vw + 0.2dvh, 4px);
     background: rgba(92, 82, 104, 0.12);
     border-radius: 999px;
     cursor: pointer;
-    margin-bottom: 7px;
+    margin-bottom: clamp(5px, 1.2vw, 7px);
 }
 
 .player-progress::before {
@@ -665,7 +682,7 @@ model-viewer {
     top: 50%;
     left: 0;
     width: 100%;
-    height: 18px;
+    height: clamp(14px, 3vw + 0.5dvh, 18px);
     transform: translateY(-50%);
 }
 
@@ -681,12 +698,12 @@ model-viewer {
 }
 
 .player-progress:hover {
-    height: 5px;
+    height: clamp(4px, 1vw, 5px);
 }
 
 .player-progress:focus-visible {
-    outline: 2px solid rgba(169, 152, 210, 0.6);
-    outline-offset: 5px;
+    outline: clamp(2px, 0.5vw, 3px) solid rgba(169, 152, 210, 0.6);
+    outline-offset: clamp(3px, 0.7vw, 5px);
 }
 
 /* =========================================================
@@ -697,9 +714,9 @@ model-viewer {
     display: flex;
     justify-content: space-between;
     color: var(--music-muted);
-    font-size: 0.68rem;
+    font-size: clamp(0.58rem, 1.2vw + 0.3dvh, 0.68rem);
     font-weight: 500;
-    margin-bottom: 11px;
+    margin-bottom: clamp(6px, 1.3vw + 0.3dvh, 11px);
 }
 
 /* =========================================================
@@ -710,12 +727,12 @@ model-viewer {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 28px;
+    gap: clamp(18px, 4.5vw + 1dvh, 28px);
 }
 
 .ctrl-btn {
-    width: 38px;
-    height: 38px;
+    width: clamp(34px, 7vw + 1dvh, 38px);
+    height: clamp(34px, 7vw + 1dvh, 38px);
     border: none;
     background: transparent;
     color: var(--music-muted);
@@ -738,15 +755,15 @@ model-viewer {
 }
 
 .ctrl-btn .material-symbols-outlined {
-    font-size: 21px;
+    font-size: clamp(17px, 3.5vw + 0.6dvh, 21px);
 }
 
 /* =========================================================
    MAIN PLAY
    ========================================================= */
 .player-play {
-    width: 52px;
-    height: 52px;
+    width: clamp(46px, 9vw + 1.5dvh, 52px);
+    height: clamp(46px, 9vw + 1.5dvh, 52px);
     border: none;
     border-radius: 50%;
     background: linear-gradient(145deg, #f6a5bd, #b8a6dc);
@@ -755,13 +772,13 @@ model-viewer {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 7px 18px rgba(169, 152, 210, 0.25);
+    box-shadow: 0 clamp(5px, 1.2vw + 0.5dvh, 7px) clamp(14px, 3vw + 0.8dvh, 18px) rgba(169, 152, 210, 0.25);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .player-play:hover {
     transform: scale(1.07);
-    box-shadow: 0 9px 24px rgba(169, 152, 210, 0.35);
+    box-shadow: 0 clamp(6px, 1.5vw + 0.8dvh, 9px) clamp(16px, 3.5vw + 1dvh, 24px) rgba(169, 152, 210, 0.35);
 }
 
 .player-play:active {
@@ -769,7 +786,7 @@ model-viewer {
 }
 
 .player-play .material-symbols-outlined {
-    font-size: 27px;
+    font-size: clamp(20px, 4vw + 0.7dvh, 27px);
     font-variation-settings: "FILL" 1;
 }
 
@@ -777,14 +794,14 @@ model-viewer {
    BACK BUTTON
    ========================================================= */
 .music-back-button {
-    margin-top: 12px;
-    padding: 9px 19px;
+    margin-top: clamp(8px, 1.8vw + 0.4dvh, 12px);
+    padding: clamp(7px, 1.6vw + 0.4dvh, 9px) clamp(15px, 3.2vw, 19px);
     background: rgba(255, 255, 255, 0.72);
     color: var(--music-muted);
     border: 1px solid rgba(169, 152, 210, 0.16);
-    box-shadow: 0 4px 12px rgba(112, 91, 125, 0.06);
+    box-shadow: 0 clamp(2px, 0.5vw + 0.1dvh, 4px) clamp(8px, 2vw + 0.4dvh, 12px) rgba(112, 91, 125, 0.06);
     backdrop-filter: blur(8px);
-    font-size: 0.82rem;
+    font-size: clamp(0.68rem, 1.4vw + 0.3dvh, 0.82rem);
 }
 
 .music-back-button:hover {
@@ -848,89 +865,28 @@ button:focus-visible {
    ========================================================= */
 @media (max-width: 768px) {
     body {
-        padding: 1.5rem 0;
         overflow-x: hidden;
     }
 
-    /* The stage's radial glow pseudo-element is 500px wide and overflows
-       the viewport on narrow screens. Constrain it to the stage width so
-       no horizontal scroll appears now that body horizontal padding is 0. */
-    /* Cover the full stage height with the glow so no dark band
-       appears at the bottom on the real mobile viewport. */
+    /* The stage's radial glow pseudo-element must cover the full stage
+       area so no dark band appears at the bottom on the real mobile
+       viewport (browser chrome collapsed or expanded). */
     .stage::before {
         inset: 0;
         width: auto;
         height: auto;
     }
 
-    .site-header h1 {
-        font-size: 1.8rem;
-    }
-
-    .site-header p {
-        font-size: 0.95rem;
-    }
-
-    .fake-shadow {
-        bottom: 10%;
-    }
-
-    /* Main 3D composition responsiveness.
+    /* 3D COMPOSITION — CATEGORY DOCUMENTATION
        The Cat model is absolutely positioned at top:35% of the wrapper and
-       (on desktop) uses height:100%, which makes its container bottom reach
-       135% of the wrapper and protrude into the FAB zone on short portrait
-       screens. Here we keep the Cat visually anchored at the Mother's feet
-       (top stays 35%) but limit its height to 65% so the container bottoms
-       out at the wrapper edge (35% + 65% = 100%) instead of 135%. The Mother
-       wrapper is left untouched on this breakpoint so the desktop composition
-       (which lives outside this media query) is not affected. */
-
-    .fab-btn {
-        width: 58px;
-        height: 58px;
-    }
-
-    .fab-btn .material-symbols-outlined {
-        font-size: 27px;
-    }
-
-    .postcard-3d-container {
-        width: min(90vw, 370px);
-        height: min(560px, 82vh);
-    }
-
-    .postcard-face {
-        padding: 26px;
-    }
-
-    .player-art {
-        width: min(58vw, 210px);
-        height: min(58vw, 210px);
-    }
-}
-
-@media (max-height: 700px) {
-    .postcard-3d-container {
-        height: 500px;
-    }
-
-    .player-art {
-        width: 175px;
-        height: 175px;
-        margin-bottom: 13px;
-    }
-
-    .music-heading {
-        margin-bottom: 8px;
-    }
-
-    .player-meta {
-        margin-bottom: 6px;
-    }
-
-    .music-back-button {
-        margin-top: 8px;
-    }
+       uses height:100%, which makes its container bottom reach 135% of the
+       wrapper and protrude into the FAB zone on short portrait screens.
+       REMEDIATION: the cat's container bottom must be clamped so the
+       composition stays within the dynamic viewport. The cat geometry
+       (#cat-model { width:50%; height:100%; left:8%; top:35% }) is
+       PRESERVED intact — no height:65% override, no px transforms.
+       The .model-wrapper fluid sizing (min(400px, 80vw, 48.75vh))
+       handles the scale adaptation. */
 }
 
 /* =========================================================

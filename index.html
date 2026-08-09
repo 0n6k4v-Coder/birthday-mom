@@ -28,9 +28,10 @@
         /* ---- PAPER ---- */
         .splash-paper {
             position: relative;
-            width: min(360px, 88vw);
-            min-height: 390px;
-            padding: 58px 32px 42px;
+            width: min(380px, 90vw);
+            min-height: min(360px, 90dvh);
+            height: min(420px, 80dvh);
+            padding: clamp(40px 7vw + 1.5dvh, 58px) clamp(24px, 7vw, 32px) clamp(32px, 6vw + 1.3dvh, 42px);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -38,7 +39,7 @@
             text-align: center;
             background: #fffdf9;
             border-radius: 3px;
-            box-shadow: 0 18px 45px rgba(91, 67, 74, 0.16);
+            box-shadow: 0 clamp(12px, 3vw, 18px) clamp(30px, 7vw, 45px) rgba(91, 67, 74, 0.16);
             transform: rotate(-1deg);
             overflow: hidden;
         }
@@ -55,12 +56,12 @@
         /* ---- TAPE ---- */
         .splash-tape {
             position: absolute;
-            top: -8px;
+            top: clamp(-10px, -2vw, -8px);
             left: 50%;
-            width: 92px;
-            height: 35px;
+            width: clamp(70px, 17vw, 92px);
+            height: clamp(26px, 6vw + 0.8dvh, 35px);
             transform: translateX(-50%) rotate(2deg);
-            background: rgba(245, 214, 170, 0.72);
+            background: rgba(245, 214, 175, 0.72);
             box-shadow: 0 1px 3px rgba(80,60,50,0.08);
             opacity: 0.85;
         }
@@ -69,20 +70,20 @@
         .splash-small-text {
             position: relative;
             font-family: "Quicksand", sans-serif;
-            font-size: 0.72rem;
+            font-size: clamp(0.6rem, 1.4vw + 0.35dvh, 0.78rem);
             font-weight: 600;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: #a18c91;
-            margin-bottom: 18px;
+            margin-bottom: clamp(12px, 2.8vw + 0.7dvh, 18px);
         }
 
         /* ---- CAKE ---- */
         .splash-cake {
             position: relative;
-            font-size: 58px;
+            font-size: clamp(38px, 11vw + 2dvh, 58px);
             line-height: 1;
-            margin-bottom: 18px;
+            margin-bottom: clamp(12px, 2.8vw, 18px);
         }
 
         /* ---- TITLE ---- */
@@ -91,7 +92,7 @@
             margin: 0;
             color: #62515a;
             font-family: "Caveat", cursive;
-            font-size: 2.55rem;
+            font-size: clamp(1.6rem, 3.8vw + 0.9dvh, 2.55rem);
             font-weight: 700;
             line-height: 1.05;
         }
@@ -100,9 +101,9 @@
         /* ---- HAND-DRAWN LINE ---- */
         .splash-line {
             position: relative;
-            width: 90px;
-            height: 8px;
-            margin: 15px 0 16px;
+            width: clamp(70px, 16vw, 90px);
+            height: clamp(6px, 1.4vw, 8px);
+            margin: clamp(10px, 2.2vw, 15px) 0 clamp(11px, 2.5vw, 16px);
         }
         .splash-line::before {
             content: "";
@@ -121,11 +122,11 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -58%);
-            padding: 0 8px;
+            padding: 0 clamp(6px, 1.5vw, 8px);
             background: #fffdf9;
             color: #dfb26f;
             font-family: "Caveat", cursive;
-            font-size: 17px;
+            font-size: clamp(13px, 2.4vw + 0.6dvh, 17px);
         }
 
         /* ---- MESSAGE ---- */
@@ -133,7 +134,7 @@
             position: relative;
             margin: 0;
             color: #8e7c82;
-            font-size: 0.88rem;
+            font-size: clamp(0.72rem, 1.5vw + 0.38dvh, 0.88rem);
             font-weight: 500;
         }
 
@@ -142,13 +143,13 @@
             position: relative;
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-top: 18px;
-            height: 14px;
+            gap: clamp(4px, 1.2vw, 6px);
+            margin-top: clamp(12px, 2.8vw, 18px);
+            height: clamp(11px, 2.2vw, 14px);
         }
         .splash-loading span {
-            width: 5px;
-            height: 5px;
+            width: clamp(4px, 1vw, 5px);
+            height: clamp(4px, 1vw, 5px);
             border-radius: 50%;
             background: #d98aa0;
         }
@@ -156,19 +157,12 @@
         /* ---- HANDWRITING ---- */
         .splash-handwriting {
             position: absolute;
-            bottom: 23px;
-            right: 25px;
+            bottom: clamp(14px, 3vw + 0.8dvh, 23px);
+            right: clamp(16px, 5vw, 25px);
             color: #b39ca2;
             font-family: "Caveat", cursive;
-            font-size: 1.05rem;
+            font-size: clamp(0.85rem, 1.6vw + 0.4dvh, 1.05rem);
             transform: rotate(-5deg);
-        }
-
-        /* ---- MOBILE ---- */
-        @media (max-width: 480px) {
-            .splash-paper { min-height: 360px; padding: 52px 26px 40px; }
-            .splash-paper h2 { font-size: 2.25rem; }
-            .splash-cake { font-size: 50px; }
         }
 
         /* ---- REDUCED MOTION ---- */
