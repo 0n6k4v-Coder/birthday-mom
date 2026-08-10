@@ -455,12 +455,24 @@ model-viewer {
    FRONT CONTENT
    ========================================================= */
 .postcard-icon {
-    font-size: clamp(36px, 8vw + 1.5dvh, 48px);
+    font-size: clamp(64px, 12vw + 2dvh, 72px);
     color: var(--accent);
     margin-bottom: clamp(10px, 2vw + 0.5dvh, 15px);
     animation: bounce 2s infinite;
     position: relative;
     z-index: 2;
+}
+
+/*
+ * The Cake glyph is rendered by an inner <span class="material-symbols-outlined">
+ * which the Google Fonts Material Symbols stylesheet defaults to font-size: 24px.
+ * Without this rule that 24px default wins over the inherited size set on
+ * .postcard-icon, so the Cake icon never grew despite the parent's font-size
+ * being raised to 64–72px. font-size:1em lets the glyph inherit the parent's
+ * clamped font-size so it actually scales.
+ */
+.postcard-icon .material-symbols-outlined {
+    font-size: 1em;
 }
 
 .postcard-front h2 {
