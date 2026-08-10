@@ -8,8 +8,7 @@
 
     <!--
         Critical Splash CSS (inlined so the Birthday Splash can paint before
-        any stylesheet download completes; the rest of the splash styling is in
-        ./css/splash.css which loads as a non-critical stylesheet).
+        any stylesheet download completes).
     -->
     <style>
         /* ---- SPLASH SCREEN (critical subset) ---- */
@@ -25,12 +24,12 @@
         }
         .birthday-splash.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-        /* ---- PAPER ---- */
         .splash-paper {
             position: relative;
-            width: min(360px, 88vw);
-            min-height: 390px;
-            padding: 58px 32px 42px;
+            width: min(380px, 90vw);
+            min-height: min(360px, 90dvh);
+            height: min(420px, 80dvh);
+            padding: clamp(40px 7vw + 1.5dvh, 58px) clamp(24px, 7vw, 32px) clamp(32px, 6vw + 1.3dvh, 42px);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -38,7 +37,7 @@
             text-align: center;
             background: #fffdf9;
             border-radius: 3px;
-            box-shadow: 0 18px 45px rgba(91, 67, 74, 0.16);
+            box-shadow: 0 clamp(12px, 3vw, 18px) clamp(30px, 7vw, 45px) rgba(91, 67, 74, 0.16);
             transform: rotate(-1deg);
             overflow: hidden;
         }
@@ -52,57 +51,52 @@
             background-size: 7px 7px;
         }
 
-        /* ---- TAPE ---- */
         .splash-tape {
             position: absolute;
-            top: -8px;
+            top: clamp(-10px, -2vw, -8px);
             left: 50%;
-            width: 92px;
-            height: 35px;
+            width: clamp(70px, 17vw, 92px);
+            height: clamp(26px, 6vw + 0.8dvh, 35px);
             transform: translateX(-50%) rotate(2deg);
-            background: rgba(245, 214, 170, 0.72);
+            background: rgba(245, 214, 175, 0.72);
             box-shadow: 0 1px 3px rgba(80,60,50,0.08);
             opacity: 0.85;
         }
 
-        /* ---- SMALL NOTE ---- */
         .splash-small-text {
             position: relative;
             font-family: "Quicksand", sans-serif;
-            font-size: 0.72rem;
+            font-size: clamp(0.6rem, 1.4vw + 0.35dvh, 0.78rem);
             font-weight: 600;
             letter-spacing: 0.08em;
             text-transform: uppercase;
             color: #a18c91;
-            margin-bottom: 18px;
+            margin-bottom: clamp(12px, 2.8vw + 0.7dvh, 18px);
         }
 
-        /* ---- CAKE ---- */
         .splash-cake {
             position: relative;
-            font-size: 58px;
+            font-size: clamp(38px, 11vw + 2dvh, 58px);
             line-height: 1;
-            margin-bottom: 18px;
+            margin-bottom: clamp(12px, 2.8vw, 18px);
         }
 
-        /* ---- TITLE ---- */
         .splash-paper h2 {
             position: relative;
             margin: 0;
             color: #62515a;
             font-family: "Caveat", cursive;
-            font-size: 2.55rem;
+            font-size: clamp(1.6rem, 3.8vw + 0.9dvh, 2.55rem);
             font-weight: 700;
             line-height: 1.05;
         }
         .splash-paper h2 span { color: #e56f91; }
 
-        /* ---- HAND-DRAWN LINE ---- */
         .splash-line {
             position: relative;
-            width: 90px;
-            height: 8px;
-            margin: 15px 0 16px;
+            width: clamp(70px, 16vw, 90px);
+            height: clamp(6px, 1.4vw, 8px);
+            margin: clamp(10px, 2.2vw, 15px) 0 clamp(11px, 2.5vw, 16px);
         }
         .splash-line::before {
             content: "";
@@ -121,67 +115,60 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -58%);
-            padding: 0 8px;
+            padding: 0 clamp(6px, 1.5vw, 8px);
             background: #fffdf9;
             color: #dfb26f;
             font-family: "Caveat", cursive;
-            font-size: 17px;
+            font-size: clamp(13px, 2.4vw + 0.6dvh, 17px);
         }
 
-        /* ---- MESSAGE ---- */
         .splash-paper p {
             position: relative;
             margin: 0;
             color: #8e7c82;
-            font-size: 0.88rem;
+            font-size: clamp(0.72rem, 1.5vw + 0.38dvh, 0.88rem);
             font-weight: 500;
         }
 
-        /* ---- LOADING DOTS ---- */
         .splash-loading {
             position: relative;
             display: flex;
             align-items: center;
-            gap: 6px;
-            margin-top: 18px;
-            height: 14px;
+            gap: clamp(4px, 1.2vw, 6px);
+            margin-top: clamp(12px, 2.8vw, 18px);
+            height: clamp(11px, 2.2vw, 14px);
         }
         .splash-loading span {
-            width: 5px;
-            height: 5px;
+            width: clamp(4px, 1vw, 5px);
+            height: clamp(4px, 1vw, 5px);
             border-radius: 50%;
             background: #d98aa0;
         }
 
-        /* ---- HANDWRITING ---- */
         .splash-handwriting {
             position: absolute;
-            bottom: 23px;
-            right: 25px;
+            bottom: clamp(14px, 3vw + 0.8dvh, 23px);
+            right: clamp(16px, 5vw, 25px);
             color: #b39ca2;
             font-family: "Caveat", cursive;
-            font-size: 1.05rem;
+            font-size: clamp(0.85rem, 1.6vw + 0.4dvh, 1.05rem);
             transform: rotate(-5deg);
         }
 
-        /* ---- MOBILE ---- */
-        @media (max-width: 480px) {
-            .splash-paper { min-height: 360px; padding: 52px 26px 40px; }
-            .splash-paper h2 { font-size: 2.25rem; }
-            .splash-cake { font-size: 50px; }
-        }
-
-        /* ---- REDUCED MOTION ---- */
         @media (prefers-reduced-motion: reduce) {
             .birthday-splash *, .birthday-splash { animation: none !important; transition: none !important; }
         }
     </style>
 
-    <!-- Preload the two critical 3D model assets as early as possible. -->
-    <!-- as="fetch" is the valid preload destination for a GLB consumed -->
-    <!-- via fetch() (model-viewer's GLTFLoader uses a same-origin fetch). -->
-    <!-- crossorigin="anonymous" matches model-viewer's fetch credentials -->
-    <!-- mode so the preloaded response is reused, NOT fetched again. -->
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/icons/favicon-16x16.png">
+    <link rel="shortcut icon" href="assets/icons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icons/apple-touch-icon.png">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Preload critical 3D GLB assets matching model-viewer fetch credentials -->
     <link rel="preload" href="./assets/models/asian-woman-3d-model.glb" as="fetch" crossorigin>
     <link rel="preload" href="./assets/models/stylized-white-cat-3d-model.glb" as="fetch" crossorigin>
 
@@ -196,10 +183,8 @@
     <!-- Material Symbols -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
 
-    <!-- Main CSS -->
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="./css/style.css">
-
-    <!-- Splash CSS (non-critical splash styling completes the look) -->
     <link rel="stylesheet" href="./css/splash.css">
 </head>
 <body>
@@ -255,7 +240,6 @@
     <!-- 3D STAGE -->
     <main class="stage">
         <div class="model-wrapper">
-            <!-- MOM -->
             <model-viewer
                 id="model"
                 src="./assets/models/asian-woman-3d-model.glb"
@@ -271,7 +255,6 @@
                 interaction-prompt="none">
             </model-viewer>
 
-            <!-- CAT -->
             <model-viewer
                 id="cat-model"
                 src="./assets/models/stylized-white-cat-3d-model.glb"
@@ -287,22 +270,22 @@
                 interaction-prompt="none">
             </model-viewer>
 
-            <!-- GROUND SHADOW -->
             <div class="fake-shadow"></div>
         </div>
     </main>
 
-    <!-- MAIL BUTTON -->
-    <button class="fab-btn" id="openCardButton" type="button" title="Open Birthday Card" aria-label="Open Birthday Card">
-        <span class="material-symbols-outlined">mail</span>
-    </button>
+    <!-- MESSAGE LAYER (Layer 3) -->
+    <section class="message-layer">
+        <button class="fab-btn" id="openCardButton" type="button" title="Open Birthday Card" aria-label="Open Birthday Card">
+            <span class="material-symbols-outlined">mail</span>
+        </button>
+    </section>
 
     <!-- POSTCARD OVERLAY -->
     <div class="postcard-overlay" id="postcardOverlay" role="dialog" aria-modal="true" aria-label="Birthday Card">
         <div class="postcard-3d-container" id="postcard3D">
             <div class="postcard-inner">
 
-                <!-- FRONT -->
                 <section class="postcard-face postcard-front">
                     <div class="postcard-stamp">
                         <span class="material-symbols-outlined">favorite</span>
@@ -320,18 +303,14 @@
                     </button>
                 </section>
 
-                <!-- MUSIC SIDE -->
                 <section class="postcard-face postcard-back">
-                    <!-- Musical Micro Elements -->
                     <span class="music-note note-one">♪</span>
                     <span class="music-note note-two">♫</span>
                     <span class="music-note note-three">♩</span>
                     <span class="music-note note-four">♪</span>
 
-                    <!-- Notebook Lines -->
                     <div class="music-paper-lines"></div>
 
-                    <!-- Header -->
                     <div class="music-heading">
                         <div class="music-heading-copy">
                             <span class="music-heading-label">A little song for you</span>
@@ -342,13 +321,12 @@
                         </span>
                     </div>
 
-                    <!-- Music Player -->
                     <div class="player-card">
                         <div class="player-art">
                             <img src="./assets/images/mom-birthday-cover.png" alt="Happy Birthday Mom album artwork">
                             <span class="player-art-label">for mom ♡</span>
                         </div>
-                        
+
                         <div class="player-meta">
                             <h3 class="player-title">Happy Birthday, Mom</h3>
                             <p class="player-artist">A little song for you ♫</p>

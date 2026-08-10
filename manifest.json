@@ -1,0 +1,20 @@
+{
+  "name": "Birthday Mom",
+  "short_name": "Birthday Mom",
+  "description": "A special birthday card for Mom",
+  "icons": [
+    {
+      "src": "assets/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#ffd1ff",
+  "background_color": "#fad0c4",
+  "display": "standalone"
+}
