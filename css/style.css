@@ -144,7 +144,7 @@ model-viewer {
     left: 8%;
     top: 35%;
     z-index: 3;
-    pointer-events: none;
+    pointer-events: auto;
 }
 
 .fake-shadow {
